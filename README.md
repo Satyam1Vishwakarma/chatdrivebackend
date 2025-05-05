@@ -2,7 +2,7 @@
 
 This repository contains the backend implementation for **ChatDrive**, a real-time chat application built using EdgeDB and Node.js. It supports features like authentication, chat messaging, and real-time updates via Socket.IO.
 
-Frontend: [ChatDrive](https://github.com/Satyam1Vishwakarma/chatdrive)
+Frontend Repo: [ChatDriveFrontend](https://github.com/Satyam1Vishwakarma/chatdrive)
 
 ## 🌐 Live Demo
 
