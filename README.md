@@ -1,26 +1,27 @@
-# ChatDrive
+# ChatDrive Backend
 
-ChatDrive is a React.js-based chatting application designed to provide seamless real-time communication between users.
+This repository contains the backend implementation for **ChatDrive**, a real-time chat application built using EdgeDB and Node.js. It supports features like authentication, chat messaging, and real-time updates via Socket.IO.
 
-## Demo
+Frontend Repo: [chatdrivefrontend](https://github.com/Satyam1Vishwakarma/chatdrive)
 
-Experience the live version of GameDrive here: [Chat Drive](https://chatdrive.onrender.com/)
+## 🌐 Live Demo
 
-## Features
+Try the live application here: [ChatDrive](https://chatdrive.vercel.app)
 
-- **Real-time Messaging**: Engage in instant conversations with friends and colleagues.
-- **User Authentication**: Secure login and registration system to protect user data.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-## Technologies Used
+## 🚀 Features
 
-- **Frontend**: React.js, Tailwind CSS
-- **Backend**: EdgeDB
-- **Languages**: TypeScript, JavaScript, EdgeQL, CSS, HTML
+- Real-time messaging with Socket.IO
+- User registration and authentication
+- Scalable backend using EdgeDB
+- RESTful API and WebSocket support
+- Clean, modular architecture
 
-## Installation
+## 🛠️ Tech Stack
 
-1. **Clone the repository**:
+- **Backend**: Node.js, Express.js
+- **Real-Time**: Socket.IO
+- **Database**: EdgeDB (EdgeQL)
+- **Languages**: JavaScript, TypeScript
+- **Deployment**: Render (backend), Vercel (frontend)
 
-   ```bash
-   git clone https://github.com/Satyam1Vishwakarma/chatdrive.git
