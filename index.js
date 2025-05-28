@@ -397,21 +397,21 @@ io.on("connection", (socket) => {
         postedby := account
     })}
       `);
-    console.log(result);
-    io.to(message["groupid"]).emit("messages response", {
-      id: message["groupid"],
-    });
-    /*
+    
+    //io.to(message["groupid"]).emit("messages response", {
+      //id: message["groupid"],
+    //});
+    
     io.to(message["groupid"]).emit("messages response", {
       id: message["groupid"],
       data: message["data"],
       postedby: {
         id: message["id"],
         name: message["username"],
-        avatar: string | null,
+        avatar: null,
       },
     });
-    */
+    
     console.log("mess added");
   });
 
