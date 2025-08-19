@@ -26,6 +26,7 @@ module default {
 
     type Messages{
         data: str;
+        bad: int64;
         position: messageno {
             constraint exclusive;
             };
