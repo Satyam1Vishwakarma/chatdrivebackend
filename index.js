@@ -29,6 +29,8 @@ const client = gel.createClient();
 gel.SHOULD_RECONNECT;
 gel.SHOULD_RETRY;
 
+const BACK_ML = process.env.NEXT_PUBLIC_URL_ML || "http://localhost:8000";
+
 const event = {
   "signin response": {
     example: { event: 1, id: 1 },
@@ -371,6 +373,7 @@ io.on("connection", (socket) => {
         messages : {
           id,
           data,
+          bad,
           postedby : {id,name,avatar},
         }
       }
@@ -388,30 +391,56 @@ io.on("connection", (socket) => {
   });
 
   socket.on("messages", async (message) => {
+    function extractLinks(text) {
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      return text.match(urlRegex) || [];
+    }
+    const urls = extractLinks(message["data"]);
+
+    if (urls.length > 0) {
+      try {
+        const response = await fetch(`${BACK_ML}/predict`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: urls[0] }),
+        });
+        const result = await response.json();
+        var bad = parseInt(result["prediction"]);
+      } catch (error) {
+        var bad = 2;//error
+      }
+    } else {
+      var bad = 0;
+    }
+
     const result = await client.query(`
       with account:= (select Account filter Account.id = <uuid> "${message["id"]}")
       update GroupServer
       filter GroupServer.id = <uuid> "${message["groupid"]}"
       set{messages += (insert Messages{
         data := "${message["data"]}",
+        bad := ${bad},
         postedby := account
     })}
       `);
-    
+
     //io.to(message["groupid"]).emit("messages response", {
-      //id: message["groupid"],
+    //id: message["groupid"],
     //});
-    
+
     io.to(message["groupid"]).emit("messages response", {
       id: message["groupid"],
       data: message["data"],
+      bad: bad,
       postedby: {
         id: message["id"],
         name: message["username"],
         avatar: null,
       },
     });
-    
+
     console.log("mess added");
   });
 
